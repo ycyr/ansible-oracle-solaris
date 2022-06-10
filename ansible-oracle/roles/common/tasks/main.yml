@@ -16,11 +16,11 @@
 #    with_file:
 #     - "~/.ssh/authorized_keys"
 #    tags:
-#     - keys
-  - name: Check for correct Ansible Version (>= 2.8)
-    assert:
-      that:
-        - "ansible_version.full is version('2.8', '>=')"
+# #     - keys
+#   - name: Check for correct Ansible Version (>= 2.8)
+#     assert:
+#       that:
+#         - "ansible_version.full is version('2.8', '>=')"
 
   - name: Install EPEL Repo
     yum: name={{ epel_rpm }} state=installed
@@ -56,6 +56,14 @@
     when: install_os_packages and ansible_os_family == 'Suse'
     tags:
       - commonpackages
+
+  - name: Install common packages Solaris
+    yum: name={{ common_packages_s11 }} state=installed
+    when: install_os_packages and ansible_os_family == 'RedHat'
+    tags:
+      - commonpackages
+
+
 
   - name: Start and enable ntp or chrony
     service: name={{ ntp_type }}d  state=started  enabled=yes
