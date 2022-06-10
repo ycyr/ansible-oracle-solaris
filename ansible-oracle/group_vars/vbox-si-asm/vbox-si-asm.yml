@@ -1,0 +1,43 @@
+---
+  hostgroup: vbox-si-asm
+  role_separation: True
+  device_persistence: asmlib
+  storage_type: ASM
+  #multipath: dm-multipath
+
+
+
+  oracle_user: oracle
+  oracle_group: oinstall
+
+
+  install_from_nfs: false
+  oracle_sw_copy: False
+  oracle_sw_unpack: True
+  oracle_stage: /u01/stage
+  oracle_stage_remote: /vagrant
+  autostartup_service: true
+
+
+
+  configure_ntp: true
+  configure_motd: true
+  configure_interconnect: false
+  configure_ssh: true
+  configure_host_disks: true
+
+  configure_hugepages: False
+
+  install_os_packages: true
+  configure_epel_repo: true
+  configure_public_yum_repo: true
+  disable_selinux: true
+
+
+  host_fs_layout:
+   - vgname: vgora
+     state: present
+     filesystem:
+       - {mntp: /u01, lvname: lvora, lvsize: 100%FREE, fstype: ext4}
+     disk:
+       - {device: /dev/sdb, pvname: /dev/sdb1}
