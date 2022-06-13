@@ -12,11 +12,18 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "rbrunckhorst/solaris11.4"
-   (0..8).each do |i|
-      config.vm.disk :disk, size: "25GB", name: "disk-#{i}"
+  # config.vm.box = "rbrunckhorst/solaris11.4"
+  # (0..8).each do |i|
+  #    config.vm.disk :disk, size: "25GB", name: "disk-#{i}"
+  #  end
+  
+   config.vm.provider :virtualbox do |vb|
+      (0..8).each do |disk|
+       diskname = "#{diskroot}/sunosfiler-sata#{disk}.vdi"
+       vb.customize ['createhd', '--filename', diskname, '--size', 25*1024]
+       vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', disk, '--device', 0, '--type', 'hdd', '--medium', diskname]
+      end
     end
-
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
