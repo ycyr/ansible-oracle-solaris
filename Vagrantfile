@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  # config.vm.box = "rbrunckhorst/solaris11.4"
+  config.vm.box = "rbrunckhorst/solaris11.4"
   # (0..8).each do |i|
   #    config.vm.disk :disk, size: "25GB", name: "disk-#{i}"
   #  end
