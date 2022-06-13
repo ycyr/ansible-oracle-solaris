@@ -17,6 +17,8 @@ Vagrant.configure("2") do |config|
   #    config.vm.disk :disk, size: "25GB", name: "disk-#{i}"
   #  end
   
+   diskroot = "/#{ENV['USER']}/VirtualBox\ VMs/"
+
    config.vm.provider :virtualbox do |vb|
       (0..8).each do |disk|
        diskname = "#{diskroot}/sunosfiler-sata#{disk}.vdi"
