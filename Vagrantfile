@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "rbrunckhorst/solaris11.4"
    (0..8).each do |i|
-      h.vm.disk :disk, size: "25GB", name: "disk-#{i}"
+      config.vm.disk :disk, size: "25GB", name: "disk-#{i}"
     end
 
 
